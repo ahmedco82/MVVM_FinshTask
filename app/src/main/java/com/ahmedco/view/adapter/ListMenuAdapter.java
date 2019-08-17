@@ -20,14 +20,17 @@ import java.util.List;
 
 public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyViewHolder> {
 
-
     private Context context;
     private List<DataModel> person;
     private ArrayList<DataModel> menuPerson = new ArrayList<>();
     private static Activity activity;
     private TextView txtTotalPrice;
 
-
+      /****
+     * Constructor Adapter 000000000000000000000000000000000000000000000000000000000000
+     * @param activity
+     * @param person
+     */
     public ListMenuAdapter(Activity activity, List<DataModel> person) {
         // this.person =  person;
         this.context = activity;
@@ -35,10 +38,11 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
         this.person = ItemsRepository.getInstance().getAllData().getValue();
     }
 
-    /***
+     /***
      * initialization text from Mainactivity to put in it a price value.
      * @param activity is object from MainActivity.
      */
+
     public void makeTotalPriceText(Activity activity) {
         txtTotalPrice = (TextView)activity.findViewById(R.id.total_txt);
         calculatTotalPrice(person);
@@ -58,11 +62,10 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
         holder.name.setText(person.get(position).getTitle().toString());
         holder.price.setText(person.get(position).getPrice());
         Picasso.get().load(String.valueOf(person.get(position).getThumbnail())).into(holder.img1);
-
         holder.itemView.setOnClickListener(new View.OnClickListener(){
            @Override
             public void onClick(View view) {
-                PreventPressMenu(position);
+               preventPressMenu(position);
             }
         });
      }
@@ -72,7 +75,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
      * @param pos is index item
      */
 
-    public void PreventPressMenu(int pos) {
+    public void preventPressMenu(int pos) {
         if (ItemsRepository.getInstance().CheckViewMenu != true){
             openDialogWindow(person.get(pos));
         } else {
@@ -87,7 +90,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
         alertDialogBuilder.setMessage(R.string.print3);
         alertDialogBuilder.setPositiveButton(R.string.print4, new DialogInterface.OnClickListener() {
 
-            // add items inside menu
+            // Add items inside menu
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i){
@@ -103,7 +106,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
         });
 
         alertDialogBuilder.setNeutralButton(R.string.print, new DialogInterface.OnClickListener(){
-          // show menu
+          // Show menu
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 person = menuPerson;
