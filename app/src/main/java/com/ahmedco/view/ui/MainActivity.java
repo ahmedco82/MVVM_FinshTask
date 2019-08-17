@@ -17,11 +17,12 @@ import com.ahmed.R;
 import java.util.ArrayList;
 import java.util.List;
 
+// I have finshed my project  000
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TextView totalTxt;
-
     private ItemsRepository newRepository;
     public static ArrayList<DataModel> NewMenu_person = new ArrayList<>();
 
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         // set a LinearLayoutManager with default vertical orientation ...........................
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
-
         newRepository.getAllData().observe(this, new Observer<List<DataModel>>() {
             @Override
             public void onChanged(@Nullable List<DataModel> dataModels) {
