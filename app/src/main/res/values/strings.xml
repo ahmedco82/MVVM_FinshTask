@@ -1,13 +1,9 @@
 <resources>
     <string name="app_name">Json_Parsing_URL_Retrofit</string>
-
-
-    <string name="print">عرض القائمة</string>
-    <string name="print1">لقد تم أضافته</string>
-    <string name="print2">لقد انتهيت من أختيار العناصر</string>
-    <string name="print3">أضف عناصر الى القائمة</string>
-    <string name="print4">أضافة</string>
-    <string name="print5">الغاء</string>
-
-
+    <string name="show_menu">عرض القائمة</string>
+    <string name="repeating_element">لقد تم أضافته</string>
+    <string name="choice_over">لقد انتهيت من أختيار العناصر</string>
+    <string name="add_to_menu">أضف عناصر الى القائمة</string>
+    <string name="add">أضافة</string>
+    <string name="cancel">الغاء</string>
 </resources>

@@ -27,7 +27,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
     private TextView txtTotalPrice;
 
       /****
-     * Constructor Adapter 000000000000000000000000000000000000000000000000000000000000
+     * Constructor Adapter
      * @param activity
      * @param person
      */
@@ -79,33 +79,29 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
         if (ItemsRepository.getInstance().CheckViewMenu != true){
             openDialogWindow(person.get(pos));
         } else {
-            Toast.makeText(context, R.string.print2, Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.choice_over, Toast.LENGTH_LONG).show();
         }
     }
 
-
-    public void openDialogWindow(final DataModel p) {
+    public void openDialogWindow(final DataModel p){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         //String[] some_array = getResources().getStringArray(R.array.your_string_array)
-        alertDialogBuilder.setMessage(R.string.print3);
-        alertDialogBuilder.setPositiveButton(R.string.print4, new DialogInterface.OnClickListener() {
-
+        alertDialogBuilder.setMessage(R.string.add_to_menu);
+        alertDialogBuilder.setPositiveButton(R.string.add, new DialogInterface.OnClickListener() {
             // Add items inside menu
-
             @Override
             public void onClick(DialogInterface dialogInterface, int i){
                 menuPerson.add(p);
-                Toast.makeText(context,R.string.print1, Toast.LENGTH_LONG).show();
+                Toast.makeText(context,R.string.repeating_element, Toast.LENGTH_LONG).show();
             }
         });
-        alertDialogBuilder.setNegativeButton(R.string.print5, new DialogInterface.OnClickListener(){
+        alertDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialogInterface, int i){
 
             }
         });
-
-        alertDialogBuilder.setNeutralButton(R.string.print, new DialogInterface.OnClickListener(){
+        alertDialogBuilder.setNeutralButton(R.string.show_menu, new DialogInterface.OnClickListener(){
           // Show menu
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -119,25 +115,23 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
         alertDialog.show();
     }
 
-
-    @Override
-    public int getItemCount() {
+     @Override
+     public int getItemCount(){
         return person.size();
-    }
+     }
 
      /**
      * @param List_ used to get price from each item inside List.
      * @return Total price
      */
 
-    private void calculatTotalPrice(List<DataModel>List_){
+     private void calculatTotalPrice(List<DataModel>List_){
         double Total =0;
         for (int i=0; i<List_.size();  i++){
             Total += Double.parseDouble(List_.get(i).getPrice().toString());
         }
         txtTotalPrice.setText("Total price is "+ Total+ " €");
     }
-
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name, price, txt;

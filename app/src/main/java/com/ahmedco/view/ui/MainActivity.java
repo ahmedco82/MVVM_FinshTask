@@ -17,7 +17,6 @@ import com.ahmed.R;
 import java.util.ArrayList;
 import java.util.List;
 
-// I have finshed my project  000
 
 public class MainActivity extends AppCompatActivity {
 
