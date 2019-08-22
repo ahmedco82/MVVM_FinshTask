@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#cd15e6"
     tools:context="com.ahmedco.view.ui.MainActivity">
-
     <TextView
         android:paddingTop="10dp"
         android:paddingLeft="10dp"
@@ -17,9 +16,8 @@
         android:text="Menu"
         android:id="@+id/total_txt"
         android:layout_gravity="left"
-        android:textColor="#fff"
+        android:textColor="@color/white"
         android:textStyle="bold"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"

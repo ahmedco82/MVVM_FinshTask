@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.ahmedco.model.DataModel;
-import com.ahmedco.networking.ItemsRepository;
+import com.ahmedco.networking.ItemsViewModel;
 import com.ahmedco.view.adapter.ListMenuAdapter;
 import com.ahmed.R;
 
@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private TextView totalTxt;
-    private ItemsRepository newRepository;
+    private ItemsViewModel newRepository;
     public static ArrayList<DataModel> NewMenu_person = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        newRepository = ViewModelProviders.of(this).get(ItemsRepository.class);
+        newRepository = ViewModelProviders.of(this).get(ItemsViewModel.class);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         // set a LinearLayoutManager with default vertical orientation ...........................
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());

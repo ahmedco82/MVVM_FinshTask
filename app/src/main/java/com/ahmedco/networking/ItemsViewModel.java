@@ -19,16 +19,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ItemsRepository extends ViewModel{
 
-    private static ItemsRepository newRepository;
+public class ItemsViewModel extends ViewModel{
+
+    private static ItemsViewModel newRepository;
 
     private static MutableLiveData<List<DataModel>>allData = new MutableLiveData<>();
     public static  boolean CheckViewMenu = false;
 
-    public static ItemsRepository getInstance(){
+    public static ItemsViewModel getInstance(){
         if (newRepository == null){
-            newRepository = new ItemsRepository();
+            newRepository = new ItemsViewModel();
         }
         return newRepository;
     }
@@ -42,7 +43,7 @@ public class ItemsRepository extends ViewModel{
         allData.setValue(new_items);
     }
 
-    public ItemsRepository(){
+    public ItemsViewModel(){
         Retrofit retrofit = ApiClient.getClient();
         ApiInterface api = retrofit.create(ApiInterface.class);
         Call<String> call = api.getString();

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.ahmedco.model.DataModel;
-import com.ahmedco.networking.ItemsRepository;
+import com.ahmedco.networking.ItemsViewModel;
 import com.ahmed.R;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
         // this.person =  person;
         this.context = activity;
         this.activity = activity;
-        this.person = ItemsRepository.getInstance().getAllData().getValue();
+        this.person = ItemsViewModel.getInstance().getAllData().getValue();
     }
 
      /***
@@ -51,7 +51,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // infalte the item Layout .............
-        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_item, parent, false);
+        View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_list_item, parent, false);
         // set the view's size, margins, paddings and layout parameters
         MyViewHolder v = new MyViewHolder(root); // pass the view to View Holder
         return v;
@@ -76,7 +76,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
      */
 
     public void preventPressMenu(int pos) {
-        if (ItemsRepository.getInstance().CheckViewMenu != true){
+        if (ItemsViewModel.getInstance().CheckViewMenu != true){
             openDialogWindow(person.get(pos));
         } else {
             Toast.makeText(context, R.string.choice_over, Toast.LENGTH_LONG).show();
@@ -106,7 +106,7 @@ public class ListMenuAdapter extends RecyclerView.Adapter<ListMenuAdapter.MyView
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 person = menuPerson;
-                ItemsRepository.getInstance().setMenu(person);
+                ItemsViewModel.getInstance().setMenu(person);
                 makeTotalPriceText(activity);
                 notifyDataSetChanged();
             }
