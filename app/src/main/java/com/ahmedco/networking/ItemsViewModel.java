@@ -4,7 +4,6 @@ package com.ahmedco.networking;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-
 import com.ahmedco.model.DataModel;
 
 import org.json.JSONArray;
@@ -19,60 +18,58 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-
-public class ItemsViewModel extends ViewModel{
+public class ItemsViewModel extends ViewModel {
 
     private static ItemsViewModel newRepository;
+    private static MutableLiveData<List<DataModel>> allData = new MutableLiveData<>();
 
-    private static MutableLiveData<List<DataModel>>allData = new MutableLiveData<>();
-    public static  boolean CheckViewMenu = false;
+    public MutableLiveData<List<DataModel>> menuPersonSelected = new MutableLiveData<>();
 
-    public static ItemsViewModel getInstance(){
-        if (newRepository == null){
-            newRepository = new ItemsViewModel();
-        }
-        return newRepository;
+    public MutableLiveData<List<DataModel>> getMenuPersonSelected() {
+        return menuPersonSelected;
     }
 
-    public MutableLiveData<List<DataModel>>getAllData(){
+    public MutableLiveData<List<DataModel>> getAllData() {
+
         return allData;
     }
 
-    public void setMenu(List<DataModel>new_items) {
-        CheckViewMenu = true;
-        allData.setValue(new_items);
+    public void addItemToSelectMenu(List<DataModel> new_items) {
+        menuPersonSelected.setValue(new_items);
     }
 
-    public ItemsViewModel(){
-        Retrofit retrofit = ApiClient.getClient();
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getString();
-        getData(call);
-       // Log.i("Trace","Okkk");
+    public ItemsViewModel() {
+
     }
-    private void getData(Call<String>call){
-        call.enqueue(new Callback<String>(){
+
+    public void loadDataFromApi() {
+        Retrofit retrofit = ApiClient.getClient();
+        MenuIApiInterface api = retrofit.create(MenuIApiInterface.class);
+        Call<String> call = api.getString();
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<String>call,Response<String>response) {
-                if(response.isSuccessful()){
-                  String jsonresponse = response.body().toString();
-                   writeGson(jsonresponse);
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    String jsonresponse = response.body().toString();
+                    writeGson(jsonresponse);
                 }
             }
+
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 allData.setValue(null);
             }
         });
     }
-    private void writeGson(String response){
+
+    private void writeGson(String response) {
         JSONArray json = null;
         ArrayList<DataModel> retroModelArrayList = new ArrayList<>();
-        try{
+        try {
             json = new JSONArray(response);
-            for(int i=0; i<json.length(); i++){
+            for (int i = 0; i < json.length(); i++) {
                 JSONObject e = json.getJSONObject(i);
-                String n =   e.getString("title");
+                String n = e.getString("title");
                 DataModel retroModel = new DataModel();
                 retroModel.setRef(e.getString("ref"));
                 retroModel.setDescription(e.getString("description"));
@@ -82,7 +79,7 @@ public class ItemsViewModel extends ViewModel{
                 retroModelArrayList.add(retroModel);
             }
             allData.setValue(retroModelArrayList);
-        }catch(JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
