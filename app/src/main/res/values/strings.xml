@@ -5,5 +5,6 @@
     <string name="choice_over">لقد انتهيت من أختيار العناصر</string>
     <string name="add_to_menu">أضف عناصر الى القائمة</string>
     <string name="add">أضافة</string>
+    <string name="not_choice">لم تقم بالاختيار</string>
     <string name="cancel">الغاء</string>
 </resources>
